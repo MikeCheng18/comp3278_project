@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FourGuys Bank</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        body {
+            background-color: whitesmoke;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #loginPage {
+            margin: 0px;
+            padding: 0px;
+            margin-top: 100px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #loginPage>div {
+            margin: 50px;
+        }
+
+        #header {
+            width: 300px;
+        }
+
+        #logo {
+            color: #4c9bef;
+            font-size: 35px;
+            font-weight: 900;
+        }
+
+        #slogan {
+            font-size: 20px;
+        }
+
+        .panelHeader {
+            margin-left: 100px !important;
+            font-size: 25px;
+            font-weight: 900;
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        #loginPanel {
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 30px;
+            height: 400px;
+            width: 300px;
+        }
+
+        #loginPanel>* {
+            margin: 10px;
+        }
+
+        #loginPanel>label {
+            display: inline-block;
+        }
+
+        #loginPanel>input {
+            display: inline-block;
+            margin-top: 0px;
+            width: 80%;
+        }
+
+        #loginPanel>div {
+            display: inline-block;
+            margin-left: 10%;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: #4c9bef;
+            font-size: 15px;
+            width: 25%;
+            color: white;
+            font-weight: 900;
+        }
+    </style>
+    <div id="loginPage">
+        <div id="header">
+            <h1 id="logo">FourGuys Bank</h1>
+            <h2 id="slogan">
+                The BEST Intelligent Know Your Customer (iKYC) system
+            </h2>
+        </div>
+
+        <div id="faceIDPanel">
+            <style>
+                #faceIDPanel {
+                    background-color: white;
+                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                    border-radius: 30px;
+                    height: 400px;
+                    width: 300px;
+                }
+            </style>
+            <p style="font-size: 25px; margin-left: 20px; margin-top: 100px">
+                Please look at the camera
+            </p><br>
+            <p style="font-size: 25px; margin-left: 20px;">
+                Say Cheese🧀
+            </p>
+            <script>
+                function faceIDLoginButton() {
+                    console.log("Enter faceIDLoginButton()");
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/faceIDLoginProgress", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.send({});
+                    xhr.onload = function () {
+                        userName = this.responseText;
+                        console.log("Username : " + userName);
+                        if (userName == "404") {
+                            window.location.href = "/";
+                        } else {
+                            if (userName.length < 50) {
+                                window.location.href = "/home/" + userName;
+                            }
+                            else {
+                                window.location.href = "/";
+                            }
+                        }
+                    };
+                }
+                faceIDLoginButton();
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>

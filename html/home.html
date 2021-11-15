@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FourGuys BANK</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        body {
+            background-color: whitesmoke;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+            /* Hide horizontal scrollbar */
+        }
+
+        #header {
+            width: 100%;
+            margin: 0px;
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+        }
+
+        #logo {
+            color: #4c9bef;
+            font-size: 35px;
+            font-weight: 900;
+            display: inline-block;
+            cursor: default;
+        }
+
+        #logoutButton {
+            display: inlinbe-block;
+            font-size: 36px;
+            margin-right: 30px;
+            height: 50px;
+            width: 50px;
+            cursor: pointer;
+        }
+
+        #currentTime {
+            width: 20%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 20px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <h1 id="logo">FourGuys Bank</h1>
+        <div id="currentTime"></div>
+        <i id="logoutButton" class="fa fa-sign-out" title="Logout" onclick="goBackToLoginPanel()"></i>
+        <script>
+            function goBackToLoginPanel() {
+                window.location.href = "/";
+            }
+
+            function updateCurrentTime() {
+                var currentdate = new Date();
+                var datetime =
+                    "Current Time:<br>"
+                    + currentdate.getDate() + "/"
+                    + (currentdate.getMonth() + 1) + "/"
+                    + currentdate.getFullYear() + "<br>"
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds();
+                document.getElementById("currentTime").innerHTML = datetime;
+            }
+
+            setInterval(updateCurrentTime, 1000);
+        </script>
+    </div>
+
+    <div id="home">
+        <style>
+            #home {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: center;
+                align-content: center;
+            }
+
+            #home>div {
+                width: 40%;
+                height: 500px;
+                background-color: white;
+                margin: 0;
+                margin-top: 50px;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                border-radius: 30px;
+            }
+
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 35%;
+                border-radius: 50%;
+                margin-top: 25px;
+            }
+
+            img:hover {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+
+            #warmWelcomeMsg {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+                font-size: 25px;
+                font-weight: 800;
+                color: #4c9bef;
+            }
+
+            #lastLoginMsg {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+                font-size: 20px;
+                color: grey;
+
+            }
+
+            .personalInfoBoxButtons {
+                display: inline-block;
+                margin-left: 10%;
+                margin-top: 20px;
+                padding: 10px;
+                border-radius: 20px;
+                background-color: #4c9bef;
+                font-size: 15px;
+                width: 25%;
+                color: white;
+                font-weight: 900;
+                cursor: pointer;
+            }
+        </style>
+        <div id="personalInfoBox" style="margin-left: 5%;">
+            <img src="/image/{{ username }}"><br>
+            <p id="warmWelcomeMsg">Welcome, </p>
+            <div id="lastLoginMsg"><b>Last Login :</b><br></div>
+            <script>
+                var username = window.location.pathname.substr(6);
+
+                var today = new Date();
+                var curHr = today.getHours();
+
+                if (curHr < 12) {
+                    document.getElementById("warmWelcomeMsg").innerText = 'Good morning, {{ username }}';
+                } else if (curHr < 18) {
+                    document.getElementById("warmWelcomeMsg").innerText = 'Good afternoon, {{ username }}';
+                } else {
+                    document.getElementById("warmWelcomeMsg").innerText = 'Good evening, {{ username }}';
+                }
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log(xhr.response);
+                        if (xhr.response == "404") {
+                            // new username, continue register, set password
+                            console.log("404");
+                            document.getElementById("lastLoginMsg").innerHTML = "";
+                        } else {
+                            document.getElementById("lastLoginMsg").innerHTML = "<b>Last Login :</b><br>" + xhr.response;
+                        };
+                    } else {
+                        console.log("The request failed!");
+                    }
+                };
+                xhr.open("GET", "/lastLoginHistory/" + username);
+                xhr.send();
+            </script>
+            <div class="personalInfoBoxButtons" onclick="printAllLoginHistory()">Login History</div>
+            <div class="personalInfoBoxButtons" onclick="gotoResetPassword()">Reset password</div>
+            <script>
+                function printAllLoginHistory(){
+                    var username = window.location.pathname.substr(6);
+                    window.location.href = "/loginHistory/" + username;
+                };
+
+                function gotoResetPassword(){
+                    var username = window.location.pathname.substr(6);
+                    window.location.href = "/resetPassowrd/" + username;
+                };
+            </script>
+        </div>
+
+        <div id="exchangeTable" style="margin-right: 5%;">
+            <style>
+                #exchangeTableTable {
+                    font-family: Arial, Helvetica, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-top: 30px;
+                }
+
+                #exchangeTableTable td,
+                #exchangeTableTable th {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                }
+
+                #exchangeTableTable tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+
+                #exchangeTableTable tr:hover {
+                    background-color: #ddd;
+                }
+
+                #exchangeTableTable th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: left;
+                    background-color: #4c9bef;
+                    color: white;
+                }
+            </style>
+            <table id="exchangeTableTable">
+                <tr>
+                    <th>Currency</th>
+                    <th>Exchange Rate (to USD)</th>
+                    <th>Interest Rate (p.a.)</th>
+                </tr>
+                {%for i in exchangeTable%}
+                <tr>
+                    <td>{{ i[0] }}</td>
+                    <td>{{ i[1] }}</td>
+                    <td>{{ i[2] }} %</td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <div id="accountsTable">
+        <style>
+            #accountsTable {
+                display: block;
+                width: 90%;
+                margin: 0;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: white;
+                margin-top: 50px;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                border-radius: 30px;
+            }
+
+            .accountTableTable {
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 0px;
+            }
+
+            .accountTableTable td,
+            .accountTableTable th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            .accountTableTable tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .accountTableTable tr:hover {
+                background-color: #ddd;
+            }
+
+            .accountTableTable th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4c9bef;
+                color: white;
+            }
+
+            .accountTableButton {
+                cursor: pointer;
+                margin-left: 20px;
+            }
+
+            h3 {
+                margin-top: 50px;
+                margin-left: 25px;
+                font-size: 25px;
+                display: inline-block;
+            }
+
+            .warmReminderOfAccountDiff {
+                margin-top: 10px;
+                margin-left: 25px;
+                font-size: 20px;
+                display: inline-block;
+            }
+
+            select {
+                margin-left: 25px;
+                font-size: 20px;
+            }
+        </style>
+
+        <br>
+        <h3>Current Accounts</h3>
+        <select id="addCurrentAccount">
+            {%for j in currentDiff %}
+            <option value="{{ j[0] }}">{{ j[0] }}</option>
+            {%endfor%}
+        </select>
+        <i onclick="addCurrentAccount('{{username}}')" style="font-size: 20px;" class="fa fa-plus accountTableButton"
+            title="Register new account"></i>
+        <br>
+        <p class="warmReminderOfAccountDiff">Current account can tranfer money to anyone including yourself.</p>
+        <table class="accountTableTable">
+            <tr>
+                <th>Account ID</th>
+                <th>Currency</th>
+                <th>Balance</th>
+                <th>Interest Earned From Last Login Till Now</th>
+                <th>Records</th>
+                <th>Transfer</th>
+            </tr>
+            {%for i in currentTable%}
+            <tr>
+                {%for j in i%}
+                <td>{{j}}</td>
+                {%endfor%}
+                <td><i onclick="record('{{username}}','{{i[0]}}')" class="fa fa-file-text-o accountTableButton"></i>
+                </td>
+                <td><i onclick="payment('{{username}}','c','{{i[0]}}')"
+                        class="fa fa-mail-forward accountTableButton"></i></td>
+            </tr>
+            {%endfor%}
+        </table>
+
+        <h3>Saving Accounts</h3>
+        <select id="addSavingAccount">
+            {%for j in savingDiff %}
+            <option value="{{ j[0] }}">{{ j[0] }}</option>
+            {%endfor%}
+        </select>
+        <i onclick="addSavingAccount('{{username}}')" style="font-size: 20px;"
+            class="fa fa-plus accountTableButton" title="Register new account"></i>
+        <br>
+        <p class="warmReminderOfAccountDiff">Saving account can tranfer money to the same user only.</p>
+        <table class="accountTableTable">
+            <tr>
+                <th>Account ID</th>
+                <th>Currency</th>
+                <th>Balance</th>
+                <th>Interest Earned From Last Login Till Now</th>
+                <th>Records</th>
+                <th>Transfer</th>
+            </tr>
+            {%for i in savingTable%}
+            <tr>
+                {%for j in i%}
+                <td>{{j}}</td>
+                {%endfor%}
+                <td><i onclick="record('{{username}}','{{i[0]}}')" class="fa fa-file-text-o accountTableButton"></i>
+                </td>
+                <td><i onclick="payment('{{username}}','s','{{i[0]}}')"
+                        class="fa fa-mail-forward accountTableButton"></i></td>
+            </tr>
+            {%endfor%}
+        </table>
+        <br><br>
+        <script>
+            function payment(username, type, account_ID) {
+                window.location.href = "/transfer/" + username + "/" + account_ID;
+            };
+
+            function record(username, account_ID) {
+                window.location.href = "/transactionRecords/" + account_ID;
+            };
+
+            function addCurrentAccount(){
+                var username = window.location.pathname.substr(6);
+                var currency = document.getElementById("addCurrentAccount").value;
+                var type = 'c';
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        if (xhr.response == "OK") {
+                            window.location.href = '/home/' + username;    
+                        } else {
+                            console.log(xhr.response);    
+                        };
+                    } else {
+                        console.log("The request failed!");
+                    }
+                };
+                xhr.open("GET", "/addAccount/" + username+'/'+currency+'/'+type);
+                xhr.send();
+
+            };
+
+            function addSavingAccount(){
+                var username = window.location.pathname.substr(6);
+                var currency = document.getElementById("addSavingAccount").value;
+                var type = 's';
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        if (xhr.response == "OK") {
+                            window.location.href = '/home/' + username;    
+                        } else {
+                            console.log(xhr.response);    
+                        };
+                    } else {
+                        console.log("The request failed!");
+                    }
+                };
+                xhr.open("GET", "/addAccount/" + username+'/'+currency+'/'+type);
+                xhr.send();
+
+            }
+        </script>
+    </div>
+</body>
+
+</html>
