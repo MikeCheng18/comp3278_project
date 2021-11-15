@@ -54,7 +54,7 @@ pip3 install mysql-connector-python
 ```
 rm -rf data
 mkdir data
-sudo mysql -u root -p iKYC < init.sql
+mysql -u root -p iKYC < init.sql
 ```
 
 ## Execute

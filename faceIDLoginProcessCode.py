@@ -56,5 +56,3 @@ def faceIDLoginProcessCode():
             else:
                 print("Face is unrecognized")
     return "404"
-
-print(faceIDLoginProcessCode())

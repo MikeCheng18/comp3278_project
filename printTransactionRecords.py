@@ -76,7 +76,3 @@ def printTransactionRecords(account_id):
         all[i][2] = "%.2f" % round(all[i][2],2)
     
     return all
-
-answer = printTransactionRecords("00000001")
-for i in answer:
-    print(i)

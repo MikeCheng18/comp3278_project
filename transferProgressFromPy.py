@@ -108,6 +108,3 @@ def transferProgressFromPy(amount, msg, myID, receipent_id):
 
         return "OK"
     return "404"
-
-
-print(transferProgressFromPy(1, 'test004', "00000001", "00000002"))

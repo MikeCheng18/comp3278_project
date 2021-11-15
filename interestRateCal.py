@@ -16,7 +16,7 @@ def interestRateCal(account_id):
         )lh ORDER BY lh.login_date ASC LIMIT 1)) d, 
     (SELECT A.balance balance FROM Account A WHERE A.account_id = %s) a,
     
-    (SELECT (Cur.interest_rate / 365) interest_rate FROM Currency Cur, Account A
+    (SELECT (Cur.interest_rate / 36500) interest_rate FROM Currency Cur, Account A
         WHERE A.currency = Cur.currency_ID AND A.account_id = %s) ir) temp
     
     SET balance = temp.newBalance WHERE account_id = %s
@@ -37,5 +37,3 @@ def interestRateCal(account_id):
     result = cursor.fetchall()
     myconn.commit()
     return result[0][0]
-
-interestRateCal(1)

@@ -30,7 +30,7 @@ def homePage(username):
     for i in result:
         from interestRateCal import interestRateCal
         tmp = interestRateCal(i[0])
-        currentTable += [[str(i[0]).zfill(6), i[1], "%.2f" % round(tmp,2), "%.2f" % round(tmp - i[2],2)]]
+        currentTable += [[str(i[0]).zfill(6), i[1], round(tmp,2), round(tmp - i[2],2)]]
 
     myconn = mysql.connector.connect(
     host="localhost", user="root", passwd="!@#$%^&*()qwertyuiopWinter2021", database="iKYC")
@@ -44,7 +44,7 @@ def homePage(username):
     for i in result:
         from interestRateCal import interestRateCal
         tmp = interestRateCal(i[0])
-        savingTable += [[str(i[0]).zfill(6), i[1], "%.2f" % round(tmp,2), "%.2f" % round(tmp - i[2],2)]]
+        savingTable += [[str(i[0]).zfill(6), i[1], round(tmp,2), round(tmp - i[2],2)]]
 
     myconn = mysql.connector.connect(
     host="localhost", user="root", passwd="!@#$%^&*()qwertyuiopWinter2021", database="iKYC")
@@ -71,5 +71,3 @@ def homePage(username):
     currentDiff = result
 
     return exchangeTable, currentTable, savingTable, savingDiff, currentDiff
-
-homePage("AMY")
