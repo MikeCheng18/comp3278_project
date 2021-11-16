@@ -23,5 +23,3 @@ def faceCapture(userName):
     
     video_capture.release()
     cv2.destroyAllWindows()
-
-faceCapture("amy")
