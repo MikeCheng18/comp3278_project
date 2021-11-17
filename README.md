@@ -8,10 +8,10 @@
 5. open a terminal under the directory ~/Desktop/COMP3278_Project
 6. run `./run.sh` to execute the program and access http://127.0.0.1:5000
 
-### Solution on potential errors
+### Troubleshooting (potential errors)
 1. If you encountered "failed to open a session for the virtual machine" error, reinstall Oracle Virtual Box 6.1.26 (older version) and its extention at https://www.virtualbox.org/wiki/Download_Old_Builds_6_1
 2. For Mac OS users, you may need to grant permission to the software during installation. (System Preferences -> Security & Privacy -> General -> Allow Oracle to load) (more information in the video)
-3. For Windows "Failed to open a session for the virutal macine FourGuysBank". When the error details show "AMD-V is disabled in the BIOS (or by the host OS) (VERR_SVM_DISABLED), go to BIOS during boot: OC (overclock settings) -> CPU features -> SVM mode (change to enabled). If the error still shows up after, restart the computer again.
+3. For Windows "Failed to open a session for the virutal macine FourGuysBank". When the error details show "AMD-V is disabled in the BIOS (or by the host OS) (VERR_SVM_DISABLED)", go to BIOS during boot: OC (overclock settings) -> CPU features -> SVM mode (change to enabled). If the error still shows up after, restart the computer again.
 
 ## Training face recognition model
 If you want to run the face recognition to register your faceID, you have to 
