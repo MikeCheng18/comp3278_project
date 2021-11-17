@@ -11,6 +11,7 @@
 ### Solution on potential errors
 1. If you encountered "failed to open a session for the virtual machine" error, reinstall Oracle Virtual Box 6.1.26 (older version) and its extention at https://www.virtualbox.org/wiki/Download_Old_Builds_6_1
 2. For Mac OS users, you may need to grant permission to the software during installation. (System Preferences -> Security & Privacy -> General -> Allow Oracle to load) (more information in the video)
+3. For Windows "cannot open session error, Go to BIOS OC -> CPU feature -> SVM mode (enabled)
 
 ### Other information
 #### Ubuntu
