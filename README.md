@@ -13,6 +13,13 @@
 2. For Mac OS users, you may need to grant permission to the software during installation. (System Preferences -> Security & Privacy -> General -> Allow Oracle to load) (more information in the video)
 3. For Windows "cannot open session error, Go to BIOS OC -> CPU feature -> SVM mode (enabled)
 
+## Training face recognition model
+If you want to run the face recognition to register your faceID, you have to 
+1. register your face at the home page of FourGuysBank.
+2. Train the face recognition AI using the command `python3 train.py`  
+    (Manually terminate the training using Ctrl + C if it is too lag later on since it runs in a forever loop)
+3. Login at the home page with your faceID.
+
 ### Other information
 #### Ubuntu
 Username : comp3278  
@@ -21,12 +28,19 @@ Password : comp3278
 Username : root  
 Password : !@#$%^&*()qwertyuiopWinter2021
 
-## Training face recognition model
-If you want to run the face recognition to register your faceID, you have to 
-1. register your face at the home page of FourGuysBank.
-2. Train the face recognition AI using the command `python3 train.py`  
-    (Manually terminate the training using Ctrl + C if it is too lag later on since it runs in a forever loop)
-3. Login at the home page with your faceID.
+## Execute
+
+```
+chmod u+x ./run.sh
+./run.sh
+```
+or
+```
+export FLASK_APP=main
+export FLASK_ENV=development
+flask run
+```
+
 
 ## Build from scratch
 ### VirtualBox
@@ -76,18 +90,4 @@ pip3 install mysql-connector-python
 rm -rf data
 mkdir data
 mysql -u root -p < init.sql
-```
-
-## Execute
-
-```
-export FLASK_APP=main
-export FLASK_ENV=development
-flask run
-```
-`
-or
-```
-chmod u+x ./run.sh
-./run.sh
 ```
