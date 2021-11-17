@@ -5,7 +5,8 @@
 2. download the Oracle Virtual Box 6.1.28 and its **extention** at https://www.virtualbox.org/wiki/Downloads 
 3. Open the Virtual Box and **import** FourGuysBank
 4. Make sure your camera is on (Devices -> Webcam)
-5. run `./run.sh` to execute the program and access http://127.0.0.1:5000
+5. open a terminal under the directory ~/Desktop/COMP3278_Project
+6. run `./run.sh` to execute the program and access http://127.0.0.1:5000
 
 ### Solution on potential errors
 1. If you encountered "failed to open a session for the virtual machine" error, reinstall Oracle Virtual Box 6.1.26 (older version) and its extention at https://www.virtualbox.org/wiki/Download_Old_Builds_6_1
